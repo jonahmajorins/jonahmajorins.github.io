@@ -28,20 +28,9 @@
             justify-content: center;
             align-items: center;
             padding: 40px 20px;
-            perspective: 2000px;
         }
 
-        .book-container {
-            position: relative;
-            width: 100%;
-            max-width: 650px;
-            height: 600px;
-        }
-
-        .page {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+        .container {
             background: #faf8f3;
             background-image:
                 repeating-linear-gradient(
@@ -56,16 +45,13 @@
                 0 10px 20px rgba(0,0,0,0.2),
                 0 20px 40px rgba(0,0,0,0.15);
             text-align: left;
+            max-width: 650px;
+            width: 100%;
             border: 1px solid rgba(139, 115, 85, 0.2);
-            transform-origin: left center;
-            transform-style: preserve-3d;
-            transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-            opacity: 0;
-            visibility: hidden;
-            z-index: 1;
+            position: relative;
         }
 
-        .page::before {
+        .container::before {
             content: '';
             position: absolute;
             top: 0;
@@ -75,34 +61,9 @@
             background: rgba(255, 182, 193, 0.3);
         }
 
-        .page.active {
-            opacity: 1;
-            visibility: visible;
-            z-index: 10;
-        }
-
-        .page.flipped {
-            transform: rotateY(-180deg);
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .page-content {
-            backface-visibility: hidden;
-        }
-
         h1 {
             font-family: 'Dancing Script', cursive;
             font-size: 3.2rem;
-            font-weight: 700;
-            color: #1a202c;
-            margin-bottom: 0;
-            line-height: 64px;
-        }
-
-        h2 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.4rem;
             font-weight: 700;
             color: #1a202c;
             margin-bottom: 0;
@@ -139,74 +100,16 @@
             line-height: 32px;
         }
 
-        .list-item {
-            font-family: 'Indie Flower', cursive;
-            font-size: 1.1rem;
-            color: #1a202c;
-            line-height: 32px;
-            margin-left: 40px;
-        }
-
-        .navigation {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            z-index: 1000;
-        }
-
-        .nav-button {
-            font-family: 'Caveat', cursive;
-            font-size: 1.2rem;
-            padding: 12px 24px;
-            background: #faf8f3;
-            border: 2px solid rgba(139, 115, 85, 0.3);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .nav-button:hover:not(:disabled) {
-            background: #2c5282;
-            color: #faf8f3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .nav-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .page-indicator {
-            font-family: 'Caveat', cursive;
-            font-size: 1.1rem;
-            color: #faf8f3;
-            text-align: center;
-            padding: 8px 16px;
-            background: rgba(139, 115, 85, 0.5);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-        }
-
         @media (max-width: 600px) {
             body {
                 padding: 20px 10px;
             }
 
-            .book-container {
-                height: 500px;
-            }
-
-            .page {
+            .container {
                 padding: 50px 30px;
             }
 
-            .page::before {
+            .container::before {
                 left: 30px;
             }
 
@@ -214,172 +117,35 @@
                 font-size: 2.8rem;
             }
 
-            h2 {
-                font-size: 2rem;
-            }
-
             .greeting {
-                font-size: 1.4rem;
+                font-size: 1.8rem;
                 margin-left: 20px;
             }
 
             .intro {
-                font-size: 1rem;
-                line-height: 32px;
+                font-size: 1.2rem;
+                line-height: 2;
                 text-indent: 20px;
             }
 
             .highlight {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
                 margin-left: 40%;
-            }
-
-            .list-item {
-                font-size: 1rem;
-                margin-left: 20px;
-            }
-
-            .navigation {
-                bottom: 20px;
-                gap: 10px;
-            }
-
-            .nav-button {
-                font-size: 1rem;
-                padding: 10px 20px;
-            }
-
-            .page-indicator {
-                font-size: 1rem;
-                padding: 6px 12px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="book-container">
-        <!-- Page 1 -->
-        <div class="page" data-page="1">
-            <div class="page-content">
-                <h1>Jonah</h1>
-                <p class="greeting">Hello World</p>
-                <p class="intro">
-                    Welcome to my personal page! I'm excited to share this space with you.
-                    This is a digital notebook showcasing different typography styles and clean design.
-                </p>
-                <p class="highlight">
-                    Flip through to learn more!
-                </p>
-            </div>
-        </div>
-
-        <!-- Page 2 -->
-        <div class="page" data-page="2">
-            <div class="page-content">
-                <h2>About Me</h2>
-                <p class="greeting">A little introduction...</p>
-                <p class="intro">
-                    I'm passionate about creating beautiful and functional web experiences.
-                    This interactive notebook is just one example of combining creativity with code.
-                </p>
-                <p class="intro">
-                    I believe in the power of design to communicate ideas and create meaningful connections.
-                </p>
-                <p class="highlight">
-                    Keep flipping!
-                </p>
-            </div>
-        </div>
-
-        <!-- Page 3 -->
-        <div class="page" data-page="3">
-            <div class="page-content">
-                <h2>My Interests</h2>
-                <p class="greeting">Things I enjoy...</p>
-                <p class="list-item">✦ Web Development & Design</p>
-                <p class="list-item">✦ Creative Typography</p>
-                <p class="list-item">✦ Interactive Experiences</p>
-                <p class="list-item">✦ Learning New Technologies</p>
-                <p class="list-item">✦ Building Cool Projects</p>
-                <p class="highlight">
-                    One more page!
-                </p>
-            </div>
-        </div>
-
-        <!-- Page 4 -->
-        <div class="page" data-page="4">
-            <div class="page-content">
-                <h2>Get In Touch</h2>
-                <p class="greeting">Let's connect!</p>
-                <p class="intro">
-                    Thanks for taking the time to flip through my digital notebook.
-                    I'd love to hear from you and connect over shared interests.
-                </p>
-                <p class="intro">
-                    Feel free to reach out anytime!
-                </p>
-                <p class="highlight">
-                    Thanks for visiting!
-                </p>
-            </div>
-        </div>
+    <div class="container">
+        <h1>Jonah</h1>
+        <p class="greeting">Hello World</p>
+        <p class="intro">
+            Welcome to my personal page! I'm excited to share this space with you.
+            This is a simple webpage showcasing different typography styles and clean design.
+        </p>
+        <p class="highlight">
+            Thanks for stopping by!
+        </p>
     </div>
-
-    <div class="navigation">
-        <button class="nav-button" id="prevBtn" onclick="previousPage()">← Previous</button>
-        <div class="page-indicator">
-            <span id="currentPage">1</span> / <span id="totalPages">4</span>
-        </div>
-        <button class="nav-button" id="nextBtn" onclick="nextPage()">Next →</button>
-    </div>
-
-    <script>
-        let currentPageIndex = 0;
-        const pages = document.querySelectorAll('.page');
-        const totalPages = pages.length;
-        const currentPageSpan = document.getElementById('currentPage');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-
-        function updatePageDisplay() {
-            pages.forEach((page, index) => {
-                page.classList.remove('active', 'flipped');
-
-                if (index === currentPageIndex) {
-                    page.classList.add('active');
-                } else if (index < currentPageIndex) {
-                    page.classList.add('flipped');
-                }
-            });
-
-            currentPageSpan.textContent = currentPageIndex + 1;
-            prevBtn.disabled = currentPageIndex === 0;
-            nextBtn.disabled = currentPageIndex === totalPages - 1;
-        }
-
-        function nextPage() {
-            if (currentPageIndex < totalPages - 1) {
-                currentPageIndex++;
-                updatePageDisplay();
-            }
-        }
-
-        function previousPage() {
-            if (currentPageIndex > 0) {
-                currentPageIndex--;
-                updatePageDisplay();
-            }
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') nextPage();
-            if (e.key === 'ArrowLeft') previousPage();
-        });
-
-        // Initialize
-        updatePageDisplay();
-    </script>
 </body>
 </html>
